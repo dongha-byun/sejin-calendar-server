@@ -2,15 +2,38 @@ server:
   port: 8888
 
 spring:
+  profiles:
+    default: local
+
   # spring.datasource.url : database 접속 Url -> jdbc:h2:mem:testdb -> testdb 라는 h2 데이터베이스를 메모리상에 올려서 애플리케이션이랑 라이프사이클을 같이 가져감. 서비스 내리면 db 내려감
   # spring.datasource.username : database 접속 계정 이름
   # spring.datasource.password : database 접속 계정 암호
   # spring.datasource.driver-class-name : 애플리케이션에서 데이터베이스 접근 시, 사용할 Driver class 명시
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:~/sejin-calendar
     username: sa
     password:
     driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  #jpa 관련 설정 --> 내일 하자...
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
 
   # spring.h2.console.enabled : true 로 지정 시, 애플리케이션 url (http://localhost:{server.port}) 로 DB 접근 가능
   # spring.h2.console.path : 애플리케이션 url 로 db 접근 시 사용할 URI 패턴 지정
@@ -20,12 +43,20 @@ spring:
       enabled: true
       path: /h2-console
 
-  #jpa 관련 설정 --> 내일 하자...
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
   jpa:
+    hibernate:
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-        use_sql_comments: true
-    hibernate:
-      ddl-auto: create
+
+  sql:
+    init:
+      mode: never

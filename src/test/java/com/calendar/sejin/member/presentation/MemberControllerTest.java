@@ -76,4 +76,42 @@ class MemberControllerTest {
                 .andExpect(jsonPath("$.status").value(HttpStatus.BAD_REQUEST.name()))
                 .andExpect(jsonPath("$.message").value("이름은 필수항목 입니다."));
     }
+
+    @Test
+    @DisplayName("사용자 추가 시, 로그인아이디는 필수 값이다.")
+    void create_member_exception_with_blank_login_id() throws Exception {
+        // given
+        MemberCreateRequest createRequest = MemberCreateRequest.builder()
+                .password("test-member-password")
+                .name("테스트 멤버")
+                .build();
+
+        // when & then
+        mockMvc.perform(post("/api/v1/members")
+                .content(objectMapper.writeValueAsString(createRequest))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(HttpStatus.BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.status").value(HttpStatus.BAD_REQUEST.name()))
+                .andExpect(jsonPath("$.message").value("로그인아이디는 필수항목 입니다."));
+    }
+
+    @Test
+    @DisplayName("사용자 추가 시, 패스워드는 필수 값이다.")
+    void create_member_exception_with_blank_password() throws Exception {
+        // given
+        MemberCreateRequest createRequest = MemberCreateRequest.builder()
+                .loginId("test-member")
+                .name("테스트 멤버")
+                .build();
+
+        // when & then
+        mockMvc.perform(post("/api/v1/members")
+                        .content(objectMapper.writeValueAsString(createRequest))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(HttpStatus.BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.status").value(HttpStatus.BAD_REQUEST.name()))
+                .andExpect(jsonPath("$.message").value("비밀번호는 필수항목 입니다."));
+    }
 }
