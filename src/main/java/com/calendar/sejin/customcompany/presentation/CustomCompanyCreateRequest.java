@@ -2,11 +2,10 @@ package com.calendar.sejin.customcompany.presentation;
 
 import com.calendar.sejin.customcompany.application.CustomCompanyCreateDto;
 import com.calendar.sejin.customcompany.domain.CompanyType;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class CustomCompanyCreateRequest {
@@ -29,6 +28,25 @@ public class CustomCompanyCreateRequest {
     private int discountRate;
 
     private String etc;
+
+    @Builder
+    public CustomCompanyCreateRequest(String name, String type, String ceoName, String registrationNumber,
+                                      String address,
+                                      String telNo, String fax, String email, String webHard, String discountType,
+                                      int discountRate, String etc) {
+        this.name = name;
+        this.type = type;
+        this.ceoName = ceoName;
+        this.registrationNumber = registrationNumber;
+        this.address = address;
+        this.telNo = telNo;
+        this.fax = fax;
+        this.email = email;
+        this.webHard = webHard;
+        this.discountType = discountType;
+        this.discountRate = discountRate;
+        this.etc = etc;
+    }
 
     public CustomCompanyCreateDto toCreateDto() {
         return CustomCompanyCreateDto.builder()
