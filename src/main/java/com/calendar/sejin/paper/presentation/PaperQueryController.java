@@ -21,8 +21,11 @@ public class PaperQueryController {
                 .map(PaperResponse::of)
                 .toList();
 
+        List<String> paperKinds = paperQueryService.findPaperKinds();
+        List<String> standards = paperQueryService.findStandards();
+
         return ResponseEntity.ok().body(
-                new PaperQueryResponse(responses)
+                new PaperQueryResponse(responses, paperKinds, standards)
         );
     }
 }

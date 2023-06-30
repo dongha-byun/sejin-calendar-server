@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class PaperQueryResponse {
     private List<PaperResponse> data;
+    private List<String> paperKinds;
+    private List<String> standards;
 }

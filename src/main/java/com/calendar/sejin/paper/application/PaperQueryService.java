@@ -15,4 +15,12 @@ public class PaperQueryService {
     public List<PaperDto> findPaperDtoAll() {
         return paperQueryRepository.findPaperDtoAll();
     }
+
+    public List<String> findPaperKinds() {
+        return paperQueryRepository.findPaperKinds();
+    }
+
+    public List<String> findStandards() {
+        return paperQueryRepository.findStandards();
+    }
 }

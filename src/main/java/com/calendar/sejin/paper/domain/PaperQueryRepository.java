@@ -20,4 +20,18 @@ public class PaperQueryRepository {
                         + "order by p.id desc", PaperDto.class)
                 .getResultList();
     }
+
+    public List<String> findPaperKinds() {
+        return em.createQuery(
+                        "select distinct(p.paperKind) from Paper p", String.class
+                )
+                .getResultList();
+    }
+
+    public List<String> findStandards() {
+        return em.createQuery(
+                        "select distinct(p.standard) from Paper p", String.class
+                )
+                .getResultList();
+    }
 }
