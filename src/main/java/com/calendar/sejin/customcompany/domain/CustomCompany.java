@@ -37,6 +37,12 @@ public class CustomCompany {
 
     private String etc;
 
+    public CustomCompany(String name, CompanyType type) {
+        this(name, type, "", "", "",
+                "", "", "", "", "", 0,
+                "");
+    }
+
     public CustomCompany(String name, CompanyType type, String ceoName, String registrationNumber, String address,
                          String telNo, String fax, String email, String webHard, String discountType, int discountRate,
                          String etc) {
