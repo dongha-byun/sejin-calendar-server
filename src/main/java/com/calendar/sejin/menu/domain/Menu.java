@@ -1,9 +1,10 @@
 package com.calendar.sejin.menu.domain;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -22,7 +23,6 @@ import lombok.NoArgsConstructor;
 public class Menu {
 
     @Id
-    @Column(name = "menu_id")
     private String id;
 
     private String name;
@@ -33,7 +33,7 @@ public class Menu {
     private String path;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_menu_id")
+    @JoinColumn(name = "parent_menu_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     private Menu parent;
 
     @OneToMany(mappedBy = "parent")

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MenuQueryController {
     private final MenuQueryService queryService;
 
-    @GetMapping("/mainMenus")
+    @GetMapping("/api/v1/mainMenus")
     public ResponseEntity<List<MainMenuResponse>> findMainMenus() {
         List<MainMenuQueryDto> mainMenus = queryService.findMainMenus();
         List<MainMenuResponse> responses = mainMenus.stream()
