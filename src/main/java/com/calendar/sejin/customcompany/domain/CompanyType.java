@@ -1,5 +1,8 @@
 package com.calendar.sejin.customcompany.domain;
 
+import lombok.Getter;
+
+@Getter
 public enum CompanyType {
     MATERIAL("자재관련"),
     PRINT("인쇄소"),
@@ -7,7 +10,7 @@ public enum CompanyType {
     BINDING("제본소"),
     AGENCY("총판");
 
-    private String typeName;
+    private final String typeName;
 
     CompanyType(String typeName) {
         this.typeName = typeName;

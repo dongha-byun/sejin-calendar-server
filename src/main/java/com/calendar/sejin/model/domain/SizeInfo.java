@@ -6,19 +6,14 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class SizeInfo {
-
-    @ColumnDefault(value = "0.0")
-    private BigDecimal width;
-
-    @ColumnDefault(value = "0.0")
-    private BigDecimal height;
+    private BigDecimal width = new BigDecimal("0.0");
+    private BigDecimal height = new BigDecimal("0.0");
     private String inch;
     private int pages;
 }

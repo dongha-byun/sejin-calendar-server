@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public enum MaterialType {
-    GOLD("금구"),
+    IRON("금구"),
     HOLDER("홀더"),
     ACETATE("아스테지"),
     TWIN("TWIN"),
-    BIG_PARER("대지"),
+    BIG_PAPER("대지"),
     BOX("Box"),
     SACK("봉투"),
     HALF_MOON("반달고리"),

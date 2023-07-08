@@ -48,15 +48,31 @@ spring:
   config:
     activate:
       on-profile: test
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
   jpa:
-    hibernate:
-      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: create
 
   sql:
     init:
       mode: never
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace
+
+
