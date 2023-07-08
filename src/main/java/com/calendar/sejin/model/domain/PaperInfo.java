@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @AllArgsConstructor
@@ -16,7 +15,5 @@ public class PaperInfo {
     private int weight;
     private String type;
     private String standard;
-
-    @ColumnDefault(value = "0.0")
-    private BigDecimal usagePerOne;
+    private BigDecimal usagePerOne = new BigDecimal("0.00");
 }

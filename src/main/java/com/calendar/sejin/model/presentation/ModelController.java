@@ -3,6 +3,7 @@ package com.calendar.sejin.model.presentation;
 import com.calendar.sejin.model.application.ModelCreateDto;
 import com.calendar.sejin.model.application.ModelDto;
 import com.calendar.sejin.model.application.ModelService;
+import jakarta.validation.Valid;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class ModelController {
     private final ModelService modelService;
 
     @PostMapping("/api/v1/model")
-    public ResponseEntity<ModelResponse> create(@RequestBody ModelCreateRequest createRequest) {
+    public ResponseEntity<ModelResponse> create(@Valid @RequestBody ModelCreateRequest createRequest) {
         ModelCreateDto createDto = createRequest.toDto();
         ModelDto modelDto = modelService.create(createDto);
         ModelResponse response = ModelResponse.of(modelDto);

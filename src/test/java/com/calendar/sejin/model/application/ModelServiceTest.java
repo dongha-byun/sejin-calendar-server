@@ -31,7 +31,9 @@ class ModelServiceTest {
         assertThat(modelDto.getId()).isNotNull();
         assertThat(modelDto.getNum()).isEqualTo("1호");
         assertThat(modelDto.getName()).isEqualTo("아름다운 강산");
-        assertThat(modelDto.getWidth()).isNull();
+        assertThat(modelDto.getWidth())
+                .isNotNull()
+                .isEqualTo(new BigDecimal("0.0"));
     }
 
     @DisplayName("모든 항목을 채워서 모델 정보를 추가한다.")

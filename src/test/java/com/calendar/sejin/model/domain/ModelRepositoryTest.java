@@ -8,8 +8,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+@ActiveProfiles("test")
 @Transactional
 @SpringBootTest
 class ModelRepositoryTest {
@@ -44,6 +46,30 @@ class ModelRepositoryTest {
         );
     }
 
+    @DisplayName("모델 등록 시, 필수 값만 입력해서 저장하면, 소수점 정보는 0.00이 저장된다.")
+    @Test
+    void big_decimal_default_value_check() {
+        // given
+        Model model = createSimpleModel("2호", "아름다운 강산");
+
+        // when
+        Model savedModel = repository.save(model);
+
+        // then
+        assertThat(savedModel.getId()).isNotNull();
+        System.out.println("savedModel = " + savedModel);
+
+        PriceInfo priceInfo = savedModel.getPriceInfo();
+        assertThat(priceInfo).isNotNull();
+    }
+
+    private Model createSimpleModel(String num, String name) {
+        return Model.builder()
+                .num(num)
+                .name(name)
+                .build();
+    }
+
     private Model createModel(String num, String name) {
         return Model.builder()
                 .num(num)
@@ -53,8 +79,10 @@ class ModelRepositoryTest {
                 )
                 .priceInfo(
                         new PriceInfo(
-                                25, new BigDecimal("23.1"),
-                                new BigDecimal("11.12"), new BigDecimal("9.12")
+                                25,
+                                new Dollar(new BigDecimal("23.1")),
+                                new Dollar(new BigDecimal("11.12")),
+                                new Dollar(new BigDecimal("9.12"))
                         )
                 )
                 .innerPaperInfo(new PaperInfo(24, "미색", "788-1009", new BigDecimal("2.3")))

@@ -1,6 +1,6 @@
 package com.calendar.sejin.model.presentation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -8,20 +8,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.calendar.sejin.model.application.ModelDto;
 import com.calendar.sejin.model.application.ModelService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(controllers = ModelController.class)
 class ModelControllerTest {
@@ -51,7 +46,46 @@ class ModelControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
                 .andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", notNullValue()));
+    }
+
+    @DisplayName("모델 정보를 등록 시, 호수 정보는 필수입력 해야한다.")
+    @Test
+    void create_api_exception_with_blank_num() throws Exception {
+        // given
+        ModelCreateRequest modelCreateRequest = getModelCreateRequest("", "아름다운 강산");
+        when(service.create(any())).thenReturn(
+                getResultMockModelDto(modelCreateRequest)
+        );
+        String content = objectMapper.writeValueAsString(modelCreateRequest);
+
+        // when & then
+        mockMvc.perform(post("/api/v1/model")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("호수는 필수 입력 값 입니다.")));
+    }
+
+    @DisplayName("모델 정보를 등록 시, 이름 정보는 필수입력 해야한다.")
+    @Test
+    void create_api_exception_with_blank_name() throws Exception {
+        // given
+        ModelCreateRequest modelCreateRequest = getModelCreateRequest("1호", "");
+        when(service.create(any())).thenReturn(
+                getResultMockModelDto(modelCreateRequest)
+        );
+        String content = objectMapper.writeValueAsString(modelCreateRequest);
+
+        // when & then
+        mockMvc.perform(post("/api/v1/model")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("모델명은 필수 입력 값 입니다.")));
     }
 
     private ModelDto getResultMockModelDto(ModelCreateRequest request) {

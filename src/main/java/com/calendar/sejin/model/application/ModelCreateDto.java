@@ -3,6 +3,7 @@ package com.calendar.sejin.model.application;
 import com.calendar.sejin.model.domain.BindingInfo;
 import com.calendar.sejin.model.domain.BoxInfo;
 import com.calendar.sejin.model.domain.BrandPrintingInfo;
+import com.calendar.sejin.model.domain.Dollar;
 import com.calendar.sejin.model.domain.Model;
 import com.calendar.sejin.model.domain.PaperInfo;
 import com.calendar.sejin.model.domain.PriceInfo;
@@ -93,7 +94,14 @@ public class ModelCreateDto {
                 .num(num)
                 .name(name)
                 .sizeInfo(new SizeInfo(width, height, inch, pages))
-                .priceInfo(new PriceInfo(internalPrice, abroadA1Price, abroadA2Price, abroadBPrice))
+                .priceInfo(
+                        new PriceInfo(
+                                internalPrice,
+                                new Dollar(abroadA1Price),
+                                new Dollar(abroadA2Price),
+                                new Dollar(abroadBPrice)
+                        )
+                )
                 .coverPaperInfo(new PaperInfo(coverPaperWidth, coverPaperType, coverPaperStandard, coverPaperUsagePerOne))
                 .innerPaperInfo(new PaperInfo(innerPaperWidth, innerPaperType, innerPaperStandard, innerPaperUsagePerOne))
                 .bindingInfo(new BindingInfo(bindingMethod, bindingPrice))
