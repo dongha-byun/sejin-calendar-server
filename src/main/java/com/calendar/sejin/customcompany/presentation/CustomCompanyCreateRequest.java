@@ -2,6 +2,7 @@ package com.calendar.sejin.customcompany.presentation;
 
 import com.calendar.sejin.customcompany.application.CustomCompanyCreateDto;
 import com.calendar.sejin.customcompany.domain.CompanyType;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +11,10 @@ import lombok.NoArgsConstructor;
 @Getter
 public class CustomCompanyCreateRequest {
 
+    @NotBlank(message = "업체명은 필수 입력 항목입니다.")
     private String name;
 
+    @NotBlank(message = "분류는 필수 선택 항목입니다.")
     private String type;
 
     private String ceoName;

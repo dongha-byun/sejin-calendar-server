@@ -5,6 +5,7 @@ import com.calendar.sejin.customcompany.application.CustomCompanyCreateDto;
 import com.calendar.sejin.customcompany.application.CustomCompanyDto;
 import com.calendar.sejin.customcompany.application.CustomCompanyService;
 import com.calendar.sejin.customcompany.application.CustomCompanyUpdateDto;
+import jakarta.validation.Valid;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class CustomCompanyController {
     }
 
     @PostMapping("/api/v1/custom-company")
-    public ResponseEntity<CustomCompanyResponse> create(@RequestBody CustomCompanyCreateRequest createRequest) {
+    public ResponseEntity<CustomCompanyResponse> create(@Valid @RequestBody CustomCompanyCreateRequest createRequest) {
         CustomCompanyCreateDto createDto = createRequest.toCreateDto();
         CustomCompanyDto customCompanyDto = customCompanyService.create(createDto);
         CustomCompanyResponse response = CustomCompanyResponse.of(customCompanyDto);
