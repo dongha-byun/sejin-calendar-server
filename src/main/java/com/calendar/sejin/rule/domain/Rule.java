@@ -31,4 +31,9 @@ public class Rule {
         this.name = name;
         this.etc = etc;
     }
+
+    public void changeRuleInfo(String name, String etc) {
+        this.name = name;
+        this.etc = etc;
+    }
 }
