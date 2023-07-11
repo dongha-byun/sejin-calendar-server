@@ -1,15 +1,11 @@
 package com.calendar.sejin.rule.domain;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -33,7 +29,7 @@ public class Rule {
     private String name;
     private String etc;
 
-    @OneToMany(mappedBy = "rule", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "rule", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private final List<RuleMenu> ruleMenus = new ArrayList<>();
 
     @Builder
