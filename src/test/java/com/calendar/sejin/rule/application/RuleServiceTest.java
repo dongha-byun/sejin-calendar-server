@@ -25,7 +25,7 @@ class RuleServiceTest {
     void create() {
         // given
         RuleCreateDto createDto = RuleCreateDto.builder()
-                .ruleId("TESTER")
+                .alias("TESTER")
                 .name("테스터")
                 .etc("테스트계정에 부여하는 권한입니다.")
                 .build();
@@ -52,7 +52,7 @@ class RuleServiceTest {
 
         // then
         assertThat(updatedRuleDto.getId()).isEqualTo(savedRule.getId());
-        assertThat(updatedRuleDto.getRuleId()).isEqualTo("TESTER");
+        assertThat(updatedRuleDto.getAlias()).isEqualTo("TESTER");
         assertThat(updatedRuleDto.getName()).isEqualTo("업데이트 룰 이름");
         assertThat(updatedRuleDto.getEtc()).isEqualTo("룰 설명 수정");
     }

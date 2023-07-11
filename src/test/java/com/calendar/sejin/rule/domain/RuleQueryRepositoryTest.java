@@ -34,7 +34,7 @@ class RuleQueryRepositoryTest {
 
         // then
         assertThat(rules).hasSize(3)
-                .extracting("ruleId", "name")
+                .extracting("alias", "name")
                 .containsExactly(
                         tuple("GUEST", "게스트"),
                         tuple("CEO", "대표이사"),

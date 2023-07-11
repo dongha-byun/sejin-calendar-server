@@ -8,20 +8,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class RuleCreateDto {
-    private String ruleId;
+    private String alias;
     private String name;
     private String etc;
 
     @Builder
-    public RuleCreateDto(String ruleId, String name, String etc) {
-        this.ruleId = ruleId;
+    public RuleCreateDto(String alias, String name, String etc) {
+        this.alias = alias;
         this.name = name;
         this.etc = etc;
     }
 
     public Rule toEntity() {
         return Rule.builder()
-                .ruleId(ruleId)
+                .alias(alias)
                 .name(name)
                 .etc(etc)
                 .build();

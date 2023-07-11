@@ -34,7 +34,7 @@ class RuleControllerTest {
     void create_rule() throws Exception {
         // given
         RuleCreateRequest createRequest = RuleCreateRequest.builder()
-                .ruleId("TESTER")
+                .alias("TESTER")
                 .name("테스터")
                 .etc("테스트를 위한 권한")
                 .build();
@@ -44,7 +44,7 @@ class RuleControllerTest {
         when(ruleService.createRule(any())).thenReturn(
                 RuleDto.builder()
                         .id(1L)
-                        .ruleId(createRequest.getRuleId())
+                        .alias(createRequest.getAlias())
                         .name(createRequest.getName())
                         .etc(createRequest.getEtc())
                         .build()
@@ -62,7 +62,7 @@ class RuleControllerTest {
     void create_rule_exception_with_no_ruleId() throws Exception {
         // given
         RuleCreateRequest createRequest = RuleCreateRequest.builder()
-                .ruleId("")
+                .alias("")
                 .name("테스터")
                 .etc("테스트를 위한 권한")
                 .build();
@@ -72,7 +72,7 @@ class RuleControllerTest {
         when(ruleService.createRule(any())).thenReturn(
                 RuleDto.builder()
                         .id(1L)
-                        .ruleId(createRequest.getRuleId())
+                        .alias(createRequest.getAlias())
                         .name(createRequest.getName())
                         .etc(createRequest.getEtc())
                         .build()
@@ -90,7 +90,7 @@ class RuleControllerTest {
     void create_rule_exception_with_no_name() throws Exception {
         // given
         RuleCreateRequest createRequest = RuleCreateRequest.builder()
-                .ruleId("TESTER")
+                .alias("TESTER")
                 .name("")
                 .etc("테스트를 위한 권한")
                 .build();
@@ -100,7 +100,7 @@ class RuleControllerTest {
         when(ruleService.createRule(any())).thenReturn(
                 RuleDto.builder()
                         .id(1L)
-                        .ruleId(createRequest.getRuleId())
+                        .alias(createRequest.getAlias())
                         .name(createRequest.getName())
                         .etc(createRequest.getEtc())
                         .build()
@@ -127,7 +127,7 @@ class RuleControllerTest {
         when(ruleService.changeRuleInfo(any(), any())).thenReturn(
                 RuleDto.builder()
                         .id(1L)
-                        .ruleId("TESTER")
+                        .alias("TESTER")
                         .name(updateRequest.getName())
                         .etc(updateRequest.getEtc())
                         .build()

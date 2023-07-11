@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @Getter
 public class RuleResponse {
     private Long id;
-    private String ruleId;
+    private String alias;
     private String name;
     private String etc;
 
     @Builder
-    public RuleResponse(Long id, String ruleId, String name, String etc) {
+    public RuleResponse(Long id, String alias, String name, String etc) {
         this.id = id;
-        this.ruleId = ruleId;
+        this.alias = alias;
         this.name = name;
         this.etc = etc;
     }
@@ -24,7 +24,7 @@ public class RuleResponse {
     public static RuleResponse of(RuleDto dto) {
         return RuleResponse.builder()
                 .id(dto.getId())
-                .ruleId(dto.getRuleId())
+                .alias(dto.getAlias())
                 .name(dto.getName())
                 .etc(dto.getEtc())
                 .build();
