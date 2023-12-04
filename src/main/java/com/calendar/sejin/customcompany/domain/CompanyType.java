@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum CompanyType {
     MATERIAL("자재관련"),
-    PRINT("인쇄소"),
+    PRINTING("인쇄소"),
     PAPER("지업사"),
     BINDING("제본소"),
     AGENCY("총판");
