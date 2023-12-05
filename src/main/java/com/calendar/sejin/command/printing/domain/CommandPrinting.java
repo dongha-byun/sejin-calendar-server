@@ -1,9 +1,7 @@
-package com.calendar.sejin.command.domain;
+package com.calendar.sejin.command.printing.domain;
 
 import com.calendar.sejin.customcompany.domain.CustomCompany;
 import com.calendar.sejin.model.domain.Model;
-import com.calendar.sejin.model.domain.PaperInfo;
-import com.calendar.sejin.model.domain.PrintingInfo;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -38,7 +36,6 @@ public class CommandPrinting {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
     private Model model;
-
     private String modelName;
 
     private int quantity;
@@ -51,7 +48,7 @@ public class CommandPrinting {
             @AttributeOverride(name="weight", column=@Column(name = "cover_paper_weight")),
             @AttributeOverride(name="type", column=@Column(name = "cover_paper_type")),
             @AttributeOverride(name="standard", column=@Column(name = "cover_paper_standard")),
-            @AttributeOverride(name="usagePerOne", column=@Column(name = "cover_paper_usagePerOne"))
+            @AttributeOverride(name="capacity", column=@Column(name = "cover_paper_capacity"))
     })
     private PaperInfo coverPaperInfo = new PaperInfo();
 
@@ -61,7 +58,7 @@ public class CommandPrinting {
             @AttributeOverride(name="weight", column=@Column(name = "inner_paper_weight")),
             @AttributeOverride(name="type", column=@Column(name = "inner_paper_type")),
             @AttributeOverride(name="standard", column=@Column(name = "inner_paper_standard")),
-            @AttributeOverride(name="usagePerOne", column=@Column(name = "inner_paper_usagePerOne"))
+            @AttributeOverride(name="capacity", column=@Column(name = "inner_paper_capacity"))
     })
     private PaperInfo innerPaperInfo = new PaperInfo();
 
@@ -82,7 +79,11 @@ public class CommandPrinting {
     private PrintingInfo innerPrintingInfo = new PrintingInfo();
 
     private String commandDate;
+
+    @Column(length = 1000)
     private String content;
+
+    @Column(length = 1000)
     private String etc;
 
     public CommandPrinting(String statementNumber, CustomCompany printingCompany, Model model, String modelName,

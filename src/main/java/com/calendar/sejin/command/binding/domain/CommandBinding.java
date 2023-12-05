@@ -1,4 +1,4 @@
-package com.calendar.sejin.command.domain;
+package com.calendar.sejin.command.binding.domain;
 
 import com.calendar.sejin.customcompany.domain.CustomCompany;
 import com.calendar.sejin.model.domain.Model;

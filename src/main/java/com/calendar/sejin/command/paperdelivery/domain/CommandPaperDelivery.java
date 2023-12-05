@@ -1,4 +1,4 @@
-package com.calendar.sejin.command.domain;
+package com.calendar.sejin.command.paperdelivery.domain;
 
 import com.calendar.sejin.customcompany.domain.CustomCompany;
 import jakarta.persistence.Entity;
