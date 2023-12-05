@@ -22,8 +22,8 @@ public class RuleMenuDto {
     public static RuleMenuDto of(RuleMenu ruleMenu) {
         return RuleMenuDto.builder()
                 .id(ruleMenu.getId())
-                .menuId(ruleMenu.getMenuId())
-                .menuName(ruleMenu.getMenuName())
+                .menuId(ruleMenu.getMenu().getId())
+                .menuName(ruleMenu.getMenu().getName())
                 .build();
     }
 }
